@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.layout.Region?>
+
+<VBox alignment="TOP_CENTER" prefWidth="539.0" spacing="20.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.weatherapp.Controller">
+  <padding>
+    <Insets bottom="20.0" left="20.0" right="20.0" top = "20.0"  />
+  </padding>
+
+  <HBox alignment="CENTER" spacing="10.0" VBox.vgrow="NEVER">
+    <TextField fx:id="searchValue" promptText="Search..." HBox.hgrow="ALWAYS" />
+    <Button onAction="#search" text="Search" style="-fx-cursor: hand;"/>
+  </HBox>
+
+  <HBox>
+    <HBox alignment="TOP_LEFT" spacing="10.0">
+      <Button onAction="#exportFavorites" text="Export favorites" style="-fx-cursor: hand;"/>
+      <Button onAction="#importFavorites" text="Import favorites" style="-fx-cursor: hand;"/>
+    </HBox>
+    <Region HBox.hgrow="ALWAYS"/>
+    <HBox alignment="TOP_RIGHT" spacing="10.0">
+      <Button onAction="#loadFavorites" text="Load favorites" style="-fx-cursor: hand;"/>
+      <Button onAction="#addToFavorites" text="Add to favorites 💖" style="-fx-cursor: hand;"/>
+      <ChoiceBox fx:id = "choice_box" prefHeight="10.0" prefWidth="96.0 " onAction="#handleChoiceBoxAction">
+        <cursor>
+          <Cursor fx:constant="DEFAULT" />
+        </cursor>
+      </ChoiceBox>
+    </HBox>
+  </HBox>
+  <HBox>
+    <HBox alignment="TOP_LEFT">
+      <Button onAction="#saveFavToDB" text="Save favorites to database" style="-fx-cursor: hand;"/>
+    </HBox>
+    <Region HBox.hgrow="ALWAYS"/>
+    <HBox alignment="TOP_RIGHT" spacing="15.0">
+      <Button onAction="#clearChart" text="Clear Chart" style="-fx-cursor: hand;"/>
+      <Button onAction="#clearFavorites" text="Clear favorites" style="-fx-cursor: hand;"/>
+    </HBox>
+  </HBox>
+
+  <HBox alignment="CENTER" style="-fx-font-size: 30px; -fx-font-weight: bold;" spacing="15">
+    <Label fx:id="city_name" style="-fx-border-style: solid; -fx-border-color: black; -fx-border-width: 0 0 2 0;">City name</Label>
+    <ImageView fx:id="flag_image" />
+  </HBox>
+
+  <HBox alignment="CENTER" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
+      <children>
+         <BarChart fx:id="bart_chart" prefWidth="900">
+           <xAxis>
+             <CategoryAxis label="City name" />
+           </xAxis>
+           <yAxis>
+             <NumberAxis label="Temperature" />
+           </yAxis>
+         </BarChart>
+      </children>
+  </HBox>
+
+  <HBox fx:id="elements_box" alignment="CENTER" opacity="0" spacing="50">
+    <padding>
+      <Insets top="0" right="0" bottom="15" left="5"/>
+    </padding>
+    <!-- upper part -->
+    <HBox alignment="CENTER" spacing="50.0">
+      <HBox alignment="CENTER" spacing="10.0">
+        <ImageView fitHeight="60" fitWidth="60">
+          <Image url="@../../../assets/clock.png" />
+        </ImageView>
+        <VBox alignment="CENTER" spacing="5.0">
+          <Label style="-fx-font-size: 15px; -fx-font-weight: bold;">
+            CURRENT TIME
+          </Label>
+          <Label fx:id="_time" style="-fx-font-size: 23px; -fx-font-weight: bold;">
+            12:00 PM
+          </Label>
+        </VBox>
+      </HBox>
+
+      <VBox alignment="CENTER" spacing="5.0">
+        <ImageView fx:id="weather_icon" fitHeight="60" fitWidth="60.0">
+          <Image url="@../../../assets/clock.png" />
+        </ImageView>
+        <Label fx:id="weather_temperature" style="-fx-font-size: 25px; -fx-font-weight: bold;">
+          10 C
+        </Label>
+        <Label fx:id="weather_type" style="-fx-font-size: 20px; -fx-font-weight: bold;">
+          SUNNY
+        </Label>
+      </VBox>
+    </HBox>
+
+    <!-- down part -->
+    <HBox alignment="CENTER" spacing="50.0">
+      <HBox alignment="CENTER" spacing="10.0">
+        <ImageView fitHeight="60" fitWidth="60">
+          <Image url="@../../../assets/humidity.png" />
+        </ImageView>
+        <VBox alignment="CENTER" spacing="5.0">
+          <Label style="-fx-font-size: 15px; -fx-font-weight: bold;">
+            HUMIDITY
+          </Label>
+          <Label fx:id="_humidity" style="-fx-font-size: 17px; -fx-font-weight: bold;">
+            100
+          </Label>
+        </VBox>
+      </HBox>
+
+      <HBox alignment="CENTER" spacing="20.0">
+        <ImageView fitHeight="60" fitWidth="60">
+          <Image url="@../../../assets/wind.png" />
+        </ImageView>
+        <VBox alignment="CENTER" spacing="5.0">
+          <Label style="-fx-font-size: 15px; -fx-font-weight: bold;">
+            WIND
+          </Label>
+          <Label fx:id="_wind" style="-fx-font-size: 17px; -fx-font-weight: bold;">
+            20 km/h
+          </Label>
+        </VBox>
+      </HBox>
+    </HBox>
+  </HBox>
+  <Line fx:id="_line" endX="100" endY="0" opacity="0" startX="0" startY="0" style="-fx-stroke: black; -fx-stroke-width: 2;" />
+</VBox>
